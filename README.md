@@ -13,7 +13,7 @@ KAConsole can be used for debugging, testing, and more. You can execute code at 
 Simply add this code to the `<head>` of your HTML program to import it.
 
 ```
-<script src="https://cdn.jsdelivr.net/gh/pfcarnahan/KAConsole@latest/KAConsole.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/pfcarnahan/KAConsole/KAConsole.js"></script>
 ```
 
 ***NOTE: Does not work in PJS or Python.***
