@@ -67,7 +67,7 @@ You can also log things to the KAConsole with `KAConsole.log(MESSAGE)`, `KAConso
 * `KAConsole.hide()`:  
 	Hides KAConsole. KAConsole can be shown with `KAConsole.show()`.
 	
-* `	KAConsole.show()`:  
+* `KAConsole.show()`:  
 	Shows KAConsole. KAConsole can be hidden with `KAConsole.hide()`.
 	
 * `KAConsole.resetLog()`:  
