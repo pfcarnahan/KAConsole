@@ -1,6 +1,6 @@
 var KAConsole = {
     VERSION: function() {
-        return "1.0.0"
+        return "1.0.1"
     },
     AUTHOR: function() {
         return "Peter@petercarnahan"
@@ -118,6 +118,7 @@ var KAConsole = {
         this.pMesgs.style["overflow-y"]="scroll"
         this.pMesgs.style.display="flex"
         this.pMesgs.style.flexDirection="column"
+		this.pMesgs.style["text-align"]="left"
         
         this.proCon = document.createElement("span")
         this.proCon.style["background-color"] = "rgb(220,220,220)"
@@ -128,6 +129,7 @@ var KAConsole = {
         this.proCon.style.left="0px"
         this.proCon.style["font-size"]="17px"
         this.proCon.textContent=">"
+        this.proCon.style["text-align"]="left"
         
         this.prompt = document.createElement("input")
         this.prompt.type="text"
