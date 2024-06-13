@@ -15,7 +15,7 @@ Recently I have added automatic Object stringification, which allows for better 
 Simply add this code to the `<head>` of your HTML program to import it.
 
 ```
-<script src="https://cdn.jsdelivr.net/gh/pfcarnahan/KAConsole/KAConsole.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/pfcarnahan/KAConsole@main/KAConsole.js"></script>
 ```
 
 ***NOTE: Does not work in PJS or Python.***
