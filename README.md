@@ -9,6 +9,8 @@ It is useful for on-the-fly code execution and viewing in the Khan Academy HTML 
 ## What is it for?
 KAConsole can be used for debugging, testing, and more. You can execute code at any time, without having to restart the program, or add complex timings or add keypress event listeners, which is clunky and complex.
 
+Recently I have added automatic Object stringification, which allows for better viewing of outputs for debugging purposes.
+
 ## How can I import it?
 Simply add this code to the `<head>` of your HTML program to import it.
 
@@ -36,6 +38,8 @@ You can use the `UP ARROW` and `DOWN ARROW` to scroll through your past commands
 
 Past command output can be seen in the window above the prompt, and you can scroll through it to see older outputs.
 
+KAConsole now will show you the contents of objects that are returned.
+
 You can also log things to the KAConsole with `KAConsole.log(MESSAGE)`, `KAConsole.warn(MESSAGE)`, and `KAConsole.error(MESSAGE)`, which mimics the normal use of `console`.
 
 ##### Commands
@@ -47,6 +51,15 @@ You can also log things to the KAConsole with `KAConsole.log(MESSAGE)`, `KAConso
 	  
 * `KAConsole.resize(newHeight)`:
 	Resizes the console to `newHeight`. `newHeight` must be in pixels.  
+	
+* `KAConsole.prepObj(input)`:  
+	Prepares `Object` inputs for logging by calling `KAConsole.stringify()` on them.
+	
+* `KAConsole.handleType(input)`:  
+	A helper function that handles the type of the input, and formats it for use in `KAConsole.stringify()`.
+	
+* `KAConsole.stringify(obj,notHTMLFormat=false)`:  
+	Returns the stringification of the Object `obj`. The second parameter is optional, and controls whether the output should use HTML formatting, in the form of `<br>` tags for line breaks and `&nbsp;` for indentation, or `\n` and normal spaces ` `.
 	
 * `KAConsole.log(msg)`:  
 	Prints `msg` to KAConsole.

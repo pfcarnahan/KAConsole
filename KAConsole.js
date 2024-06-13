@@ -105,7 +105,6 @@ var KAConsole = {
         }
     },
     
-    
     log: function(msg) {
         var toAdd = document.createElement("span")
         toAdd.width=window.innerWidth-2+"px"
