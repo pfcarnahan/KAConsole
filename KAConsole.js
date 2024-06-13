@@ -1,6 +1,6 @@
 var KAConsole = {
     VERSION: function() {
-        return "1.0.1"
+        return "1.1.0"
     },
     AUTHOR: function() {
         return "Peter@petercarnahan"
@@ -34,13 +34,85 @@ var KAConsole = {
         }
     },
     
+    prepObj: function(input) {
+        var out = input;
+        var str;
+        if(typeof(input)!=="function"&&!(input instanceof Error)&&Object(input)===input) {
+            out = input.toString()+": {<br>"
+            var objs = []
+            str = this.stringify(input)
+            out += str
+            out += "}"
+        }
+        return out
+    },
+    handleType: function(input) {
+        var out = ""
+        if(input===null||input===undefined) {
+            out += input
+        } else {
+            switch(typeof input) {
+                case "number":
+                    out += input.toString()
+                    break;
+                case "string":
+                    out += "\""+input+"\""
+                    break;
+                case "object":
+                    if(Array.isArray(input)) {
+                        out += "["
+                        for(var index in input) {
+                            out += this.handleType(input[index])
+                            if(index < input.length-1) {
+                                out += ","
+                            }
+                        }
+                        out += "]"
+                    } else {
+                        out += Object.prototype.toString.call(input)
+                    }
+                    break;
+                case "boolean":
+                    out += input.toString()
+                    break;
+                case "function":
+                    out += "function"
+                    break;
+            }
+        }
+        return out
+    },
+    stringify: function(obj,notHTMLFormat=false) {
+        if(typeof obj==="object") {
+            var keys = Object.keys(obj)
+            var vals = Object.values(obj)
+            var out = ""
+            for(var i in keys) {
+                try {
+                    out += (notHTMLFormat?"    ":"&nbsp;&nbsp;&nbsp;&nbsp;")+keys[i] + ": "
+                    var v = vals[i]
+                    out += this.handleType(v)
+                } catch(e) {
+                    out += "\"Could not access "+keys[i]+": "+e.message+"\""
+                }
+                if(i !== keys.length-1) {
+                    out += ","+(notHTMLFormat?"\n":"<br>")
+                }
+            }
+            return out
+        } else {
+            return obj
+        }
+    },
+    
+    
     log: function(msg) {
         var toAdd = document.createElement("span")
         toAdd.width=window.innerWidth-2+"px"
         var tS = toAdd.style
         tS.color = "black"
         tS["overflow-wrap"]="break-word"
-        toAdd.textContent = "> "+msg
+        toAdd.innerHTML = "> "+this.prepObj(msg)
         if(this.pMesgs) {
             this.pMesgs.appendChild(toAdd)
             this.pMesgs.scrollTo(0,this.pMesgs.scrollHeight)
@@ -51,7 +123,7 @@ var KAConsole = {
         var tS = toAdd.style
         tS.color = "rgb(255,255,0)"
         tS.backgroundColor="rgb(150,150,0)"
-        toAdd.textContent = "> "+msg
+        toAdd.innerHTML = "> "+this.prepObj(msg)
         if(this.pMesgs) {
             this.pMesgs.appendChild(toAdd)
             this.pMesgs.scrollTo(0,this.pMesgs.scrollHeight)
@@ -62,7 +134,7 @@ var KAConsole = {
         var tS = toAdd.style
         tS.color = "rgb(255,0,0)"
         tS.backgroundColor = "rgb(100,0,0)"
-        toAdd.textContent = "> "+msg
+        toAdd.innerHTML = "> "+this.prepObj(msg)
         if(this.pMesgs) {
             this.pMesgs.appendChild(toAdd)
             this.pMesgs.scrollTo(0,this.pMesgs.scrollHeight)
